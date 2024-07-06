@@ -1,0 +1,36 @@
+edition: 1.0.0
+name: component-test
+access: '{{ access }}'
+services:
+  ap-southeast-1-s235456089-test2024:
+    component: fc
+    props:
+      region: ap-southeast-1
+      service:
+        internetAccess: true
+        ossMountConfig:
+          mountPoints: []
+        name: s235456089
+      function:
+        handler: index.handler
+        timeout: 60
+        diskSize: 512
+        instanceType: e1
+        runtime: nodejs16
+        cpu: 0.35
+        instanceConcurrency: 1
+        memorySize: 512
+        environmentVariables: {}
+        name: test2024
+        codeUri: ./s235456089/test2024
+      triggers:
+        - name: defaultTrigger
+          description: ''
+          type: http
+          qualifier: LATEST
+          config:
+            methods:
+              - GET
+              - POST
+            authType: anonymous
+            disableURLInternet: false
